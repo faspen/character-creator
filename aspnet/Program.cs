@@ -1,15 +1,14 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using CharacterCreator.Data;
 using CharacterCreator.Interfaces;
-using CharacterCreator.Repositories; // Adjust this to your actual namespace
+using CharacterCreator.Repositories;
+using CharacterCreator.Dtos; // Adjust this to your actual namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(CharacterCreatorAutoMapper));
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
