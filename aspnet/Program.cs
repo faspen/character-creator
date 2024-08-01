@@ -2,7 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using CharacterCreator.Data;
 using CharacterCreator.Interfaces;
 using CharacterCreator.Repositories;
-using CharacterCreator.Dtos; // Adjust this to your actual namespace
+using CharacterCreator.Dtos;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,10 +24,15 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowSpecificOrigin",
         builder =>
         {
-            builder.WithOrigins("http://localhost:4200") // Your Angular app URL
+            builder.WithOrigins("http://localhost:4200")
                    .AllowAnyHeader()
                    .AllowAnyMethod();
         });
+});
+
+builder.Services.AddOpenApiDocument(configure =>
+{
+    configure.Title = "Character API";
 });
 
 var app = builder.Build();
@@ -36,10 +42,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseOpenApi();
 app.UseCors("AllowSpecificOrigin"); // Apply the CORS policy
+app.UseSwaggerUI();
 app.UseAuthorization();
 app.MapControllers();
 

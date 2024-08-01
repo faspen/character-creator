@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "api": "nswag openapi2tsclient /input:http://localhost:5058/swagger/v1/swagger.json /output:src/app/api/character-api.ts",
     "serve:ssr:character-creator": "node dist/character-creator/server/server.mjs"
   },
   "private": true,
@@ -22,6 +23,7 @@
     "@angular/router": "^18.1.0",
     "@angular/ssr": "^18.1.3",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
