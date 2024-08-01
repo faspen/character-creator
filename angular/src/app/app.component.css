@@ -1,0 +1,14 @@
+.navbar-nav .nav-link.active {
+    position: relative;
+  }
+  
+  .navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 2px;
+    background-color: #113c6a;
+  }
+  

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CharacterComponent } from './character/character.component';
 import { FactionComponent } from './faction/faction.component';
 import { LocationComponent } from './location/location.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LocationComponent } from './location/location.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
