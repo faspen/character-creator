@@ -1,0 +1,68 @@
+<form #characterForm="ngForm" (ngSubmit)="create()">
+    <div class="modal fade" [ngClass]="{'show': modalVisible}" [style.display]="modalVisible ? 'block' : 'none'" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Character</h5>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column">
+                        <div class="d-flex flex-row mb-2">
+                            <div class="d-flex flex-column me-2">
+                                <label for="firstName" class="mb-1"><i class="text-danger">*</i> First Name</label>
+                                <input 
+                                    type="text"
+                                    name="firstName"
+                                    id="firstName"
+                                    class="form-control border-primary"
+                                    #charFirstName="ngModel"
+                                    [(ngModel)]="characterDto.firstName"
+                                    placeholder="Enter first name"
+                                    [required]="true"
+                                >
+                                <div *ngIf="charFirstName.invalid && (charFirstName.dirty || charFirstName.touched)">
+                                    <small *ngIf="charFirstName.errors?.['required']" class="text-danger">First Name is required.</small>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column me-2">
+                                <label for="lastName" class="mb-1"><i class="text-danger">*</i> Last Name</label>
+                                <input 
+                                    type="text"
+                                    name="lastName"
+                                    id="lastName"
+                                    class="form-control border-primary"
+                                    #charLastName="ngModel"
+                                    [(ngModel)]="characterDto.lastName"
+                                    placeholder="Enter first name"
+                                    [required]="true"
+                                >
+                                <div *ngIf="charLastName.invalid && (charLastName.dirty || charLastName.touched)">
+                                    <small *ngIf="charLastName.errors?.['required']" class="text-danger">Last Name is required.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <div class="d-flex flex-column me-2">
+                                <label for="age" class="mb-1">Age</label>
+                                <input 
+                                    type="number"
+                                    name="age"
+                                    id="age"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.age"
+                                    placeholder="Enter age"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                    <button type="submit" [disabled]="characterForm.invalid" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+  

@@ -1,5 +1,8 @@
 .card-container {
-    overflow-y: auto;
-    max-height: 80vh; /* Adjust this value based on your design */
-  }
-  
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.card-text {
+  font-size: 14px;
+}

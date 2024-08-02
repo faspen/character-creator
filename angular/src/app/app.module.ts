@@ -7,18 +7,22 @@ import { CharacterComponent } from './character/character.component';
 import { FactionComponent } from './faction/faction.component';
 import { LocationComponent } from './location/location.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CharacterModalComponent } from './character/character-modal/character-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CharacterComponent,
     FactionComponent,
-    LocationComponent
+    LocationComponent,
+    CharacterModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()
