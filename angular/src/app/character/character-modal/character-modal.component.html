@@ -1,9 +1,10 @@
-<form #characterForm="ngForm" (ngSubmit)="create()">
+<form #characterForm="ngForm" (ngSubmit)="save()">
     <div class="modal fade" [ngClass]="{'show': modalVisible}" [style.display]="modalVisible ? 'block' : 'none'" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Character</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngIf="characterDto.id < 1">Create Character</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" *ngIf="characterDto.id > 0">Update Character</h5>
                     <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
                 </div>
                 <div class="modal-body">
@@ -59,7 +60,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-                    <button type="submit" [disabled]="characterForm.invalid" class="btn btn-primary">Create</button>
+                    <button type="submit" [disabled]="characterForm.invalid" class="btn btn-primary" *ngIf="characterDto.id < 1">Create</button>
+                    <button type="submit" [disabled]="characterForm.invalid" class="btn btn-primary" *ngIf="characterDto.id > 0">Update</button>
                 </div>
             </div>
         </div>
