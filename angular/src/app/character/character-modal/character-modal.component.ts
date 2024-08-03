@@ -1,9 +1,10 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CharacterModalService } from './character-modal-service.service';
 import { Subscription } from 'rxjs';
 import { CharacterAddEditDto } from '../character.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../constants.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-character-modal',
@@ -11,6 +12,7 @@ import { ConstantsService } from '../../constants.service';
   styleUrl: './character-modal.component.css'
 })
 export class CharacterModalComponent implements OnInit, OnDestroy {
+  @ViewChild('characterForm') characterForm: NgForm | undefined;
   @Input() characterDto = new CharacterAddEditDto();
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
   modalVisible = false;
@@ -40,20 +42,34 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   }
 
   closeModal() {
+    this.characterForm?.resetForm();
     this.modalService.hideModal();
   }
 
-  create() {
-    this.http.post(this.constants.apiUrl + 'Character', this.characterDto, { responseType: 'text' })
-      .subscribe({
-        next: res => {
-          this.refreshData.emit();
-          this.closeModal();
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
+  save() {
+    if (this.characterDto.id < 1) {
+      this.http.post(this.constants.apiUrl + 'Character', this.characterDto, { responseType: 'text' })
+        .subscribe({
+          next: res => {
+            this.refreshData.emit();
+            this.closeModal();
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
+    } else {
+      this.http.put(this.constants.apiUrl + 'Character', this.characterDto, { responseType: 'text' })
+        .subscribe({
+          next: res => {
+            this.refreshData.emit();
+            this.closeModal();
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
+    }
   }
 
   showBackdrop() {

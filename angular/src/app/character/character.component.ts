@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../constants.service';
-import { CharacterDto } from './character.model';
+import { CharacterAddEditDto, CharacterDto } from './character.model';
 import { CharacterModalService } from './character-modal/character-modal-service.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { CharacterModalService } from './character-modal/character-modal-service
 export class CharacterComponent implements OnInit {
   @ViewChild('characterModal') characterModal: ElementRef | undefined;
   characters: CharacterDto[] = [];
+  characterToUpdate = new CharacterAddEditDto();
 
   constructor(private http: HttpClient, private constants: ConstantsService, private modalService: CharacterModalService) { }
   
@@ -31,6 +32,12 @@ export class CharacterComponent implements OnInit {
 
   openModal() {
     this.modalService.showModal();
+    this.characterToUpdate = new CharacterAddEditDto();
+  }
+
+  openForEdit(character: CharacterDto) {
+    this.openModal();
+    this.characterToUpdate = { ...character };
   }
 
   delete(id: number) {

@@ -1,6 +1,6 @@
 <div class="d-flex flex-row justify-content-center mb-3">
     <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Character</button>
-    <app-character-modal (refreshData)="getData()"></app-character-modal>
+    <app-character-modal [characterDto]="characterToUpdate" (refreshData)="getData()"></app-character-modal>
 </div>
 <div class="container card-container">
     <div *ngIf="characters.length === 0">No characters</div>
@@ -11,7 +11,7 @@
             <div class="d-flex flex-row mb-2 justify-content-between">
                 <h6 class="card-title">{{ char.firstName + ' ' + char.lastName }}</h6>
                 <div class="f-flex flex-row">
-                  <i class="bi bi-pencil-square me-2" role="button"></i>
+                  <i class="bi bi-pencil-square me-2" role="button" (click)="openForEdit(char)"></i>
                   <i class="bi bi-trash3 me-1" role="button" (click)="delete(char.id)"></i>
                 </div>
             </div>
