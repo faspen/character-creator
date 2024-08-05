@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { CharacterComponent } from './character/character.component';
 import { FactionComponent } from './faction/faction.component';
 import { LocationComponent } from './location/location.component';
+import { RaceComponent } from './race/race.component';
 
 const routes: Routes = [
   { path: 'characters', component: CharacterComponent },
   { path: 'factions', component: FactionComponent },
   { path: 'locations', component: LocationComponent },
+  { path: 'races', component: RaceComponent },
   { path: '', redirectTo: '/characters', pathMatch: 'full' },
   { path: '**', redirectTo: '/characters' }
 ];
