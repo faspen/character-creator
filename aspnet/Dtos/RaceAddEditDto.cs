@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using CharacterCreator.Data;
 
-namespace CharacterCreator.Data
+namespace CharacterCreator.Dtos
 {
-    public class Race
+    public class RaceAddEditDto
     {
         [Key]
         public int Id { get; set; }
@@ -10,7 +11,5 @@ namespace CharacterCreator.Data
         [Required]
         public string Name { get; set; }
         public string? Description { get; set; }
-
-        public ICollection<Character> Characters { get; set; }
     }
 }

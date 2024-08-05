@@ -9,6 +9,8 @@ import { LocationComponent } from './location/location.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CharacterModalComponent } from './character/character-modal/character-modal.component';
 import { FormsModule } from '@angular/forms';
+import { RaceComponent } from './race/race.component';
+import { RaceModalComponent } from './race/race-modal/race-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FormsModule } from '@angular/forms';
     CharacterComponent,
     FactionComponent,
     LocationComponent,
-    CharacterModalComponent
+    CharacterModalComponent,
+    RaceComponent,
+    RaceModalComponent
   ],
   imports: [
     BrowserModule,

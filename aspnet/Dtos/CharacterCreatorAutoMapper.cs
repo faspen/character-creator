@@ -9,6 +9,9 @@ namespace CharacterCreator.Dtos
         {
             CreateMap<Character, CharacterDto>();
             CreateMap<CharacterAddEditDto, Character>();
+
+            CreateMap<Race, RaceDto>();
+            CreateMap<RaceAddEditDto, Race>();
         }
     }
 }
