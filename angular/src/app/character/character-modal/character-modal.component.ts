@@ -1,10 +1,17 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CharacterModalService } from './character-modal-service.service';
 import { Subscription } from 'rxjs';
-import { CharacterAddEditDto } from '../character.model';
+import { CharacterAddEditDto, Sex } from '../character.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../constants.service';
 import { NgForm } from '@angular/forms';
+import { RaceDto } from '../../race/race.model';
+
+class Option {
+  name: string = '';
+  value: Sex = 0;
+  disabled: boolean = false;
+}
 
 @Component({
   selector: 'app-character-modal',
@@ -15,9 +22,16 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   @ViewChild('characterForm') characterForm: NgForm | undefined;
   @Input() characterDto = new CharacterAddEditDto();
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
+  races: RaceDto[] = [];
   modalVisible = false;
+  default = { id: 0, name: 'Select race', description: '' };
   subscription!: Subscription;
   backdrop: HTMLElement | null = null;
+  options: Option[] = [
+    { name: 'Select sex', value: 0, disabled: true },
+    { name: 'Male', value: 1, disabled: false },
+    { name: 'Female', value: 2, disabled: false }
+  ]
 
   constructor(
     private modalService: CharacterModalService,
@@ -35,10 +49,22 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
         this.hideBackdrop();
       }
     });
+    this.getRaces();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getRaces() {
+    this.http.get(this.constants.apiUrl + 'Race')
+      .subscribe({
+        next: res => {
+          this.races = res as RaceDto[];
+          this.races = [this.default].concat(this.races);
+        },
+        error: err => console.log(err)
+      });
   }
 
   closeModal() {
@@ -47,6 +73,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.characterDto.sex = Number(this.characterDto.sex);
     if (this.characterDto.id < 1) {
       this.http.post(this.constants.apiUrl + 'Character', this.characterDto, { responseType: 'text' })
         .subscribe({

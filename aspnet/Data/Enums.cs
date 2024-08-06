@@ -2,7 +2,8 @@ namespace CharacterCreator.Data
 {
     public enum Sex
     {
-        Male = 1,
+        NotSelected = 0,
+        Male,
         Female
     }
 }
