@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using CharacterCreator.Data;
 
 namespace CharacterCreator.Dtos
 {
@@ -12,5 +13,11 @@ namespace CharacterCreator.Dtos
         public string LastName { get; set; }
 
         public int Age { get; set; }
+        public Sex Sex { get; set; }
+        public int Height { get; set; }
+        public string? HairColor { get; set; }
+        public string? EyeColor { get; set; }
+
+        public int? RaceId { get; set; }
     }
 }

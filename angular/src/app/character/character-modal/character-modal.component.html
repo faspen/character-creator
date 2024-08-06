@@ -43,8 +43,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex flex-row">
-                            <div class="d-flex flex-column me-2">
+                        <div class="d-flex flex-row mb-2">
+                            <div class="d-flex flex-column w-25 me-2">
                                 <label for="age" class="mb-1">Age</label>
                                 <input 
                                     type="number"
@@ -54,6 +54,67 @@
                                     [(ngModel)]="characterDto.age"
                                     placeholder="Enter age"
                                 >
+                            </div>
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="sex" class="mb-1">Sex</label>
+                                <select 
+                                    name="sex"
+                                    id="sex"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.sex"
+                                    aria-placeholder="Choose sex"
+                                >
+                                    <option *ngFor="let option of options" [value]="option.value" [disabled]="option.disabled">{{ option.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row mb-2">
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="height" class="mb-1">Height (cm)</label>
+                                <input 
+                                    type="number"
+                                    name="height"
+                                    id="height"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.height"
+                                    placeholder="Enter height"
+                                >
+                            </div>
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="hair" class="mb-1">Hair color</label>
+                                <input 
+                                    type="text"
+                                    name="hair"
+                                    id="hair"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.hairColor"
+                                    placeholder="Enter hair color"
+                                >
+                            </div>
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="eye" class="mb-1">Eye color</label>
+                                <input 
+                                    type="text"
+                                    name="eye"
+                                    id="eye"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.eyeColor"
+                                    placeholder="Enter eye color"
+                                >
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row mb-2">
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="race" class="mb-1">Race</label>
+                                <select
+                                    name="race"
+                                    id="race"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.raceId"
+                                    aria-placeholder="Select race"
+                                >
+                                    <option *ngFor="let race of races" [value]="race.id" [disabled]="race.id === 0">{{ race.name }}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
