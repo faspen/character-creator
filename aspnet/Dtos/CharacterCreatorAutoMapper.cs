@@ -15,6 +15,9 @@ namespace CharacterCreator.Dtos
 
             CreateMap<Faction, FactionDto>();
             CreateMap<FactionAddEditDto, Faction>();
+
+            CreateMap<Location, LocationDto>();
+            CreateMap<LocationAddEditDto, Location>();
         }
     }
 }
