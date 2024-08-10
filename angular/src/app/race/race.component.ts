@@ -13,6 +13,7 @@ export class RaceComponent {
   @ViewChild('characterModal') characterModal: ElementRef | undefined;
   races: RaceDto[] = [];
   raceToUpdate = new RaceAddEditDto();
+  deletionWarningShow = false;
 
   constructor(private http: HttpClient, private constants: ConstantsService, private modalService: RaceModalService) { }
   
@@ -40,8 +41,16 @@ export class RaceComponent {
     this.raceToUpdate = { ...character };
   }
 
-  delete(id: number) {
-    this.http.delete(this.constants.apiUrl + 'Race/' + id)
+  delete(race: RaceDto) {
+    if (race.characters.length > 0) {
+      this.deletionWarningShow = true;
+      setTimeout(() => {
+        this.deletionWarningShow = false;
+      }, 5000);
+
+      return;
+    }
+    this.http.delete(this.constants.apiUrl + 'Race/' + race.id)
       .subscribe({
         next: res => {
           this.getData();

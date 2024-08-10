@@ -19,7 +19,8 @@ namespace CharacterCreator.Data
             modelBuilder.Entity<Character>()
                 .HasOne(c => c.Race)
                 .WithMany(r => r.Characters)
-                .HasForeignKey(c => c.RaceId);
+                .HasForeignKey(c => c.RaceId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

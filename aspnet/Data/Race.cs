@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CharacterCreator.Data
 {
@@ -11,6 +12,7 @@ namespace CharacterCreator.Data
         public string Name { get; set; }
         public string? Description { get; set; }
 
+        [JsonIgnore]
         public ICollection<Character> Characters { get; set; }
     }
 }

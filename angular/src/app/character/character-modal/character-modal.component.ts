@@ -24,7 +24,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
   races: RaceDto[] = [];
   modalVisible = false;
-  default = { id: 0, name: 'Select race', description: '' };
+  default: RaceDto = { id: 0, name: 'Select race', description: '', characters: [] };
   subscription!: Subscription;
   backdrop: HTMLElement | null = null;
   options: Option[] = [

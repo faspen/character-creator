@@ -2,6 +2,9 @@
     <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Race</button>
     <app-race-modal [raceDto]="raceToUpdate" (refreshData)="getData()"></app-race-modal>
 </div>
+<div *ngIf="deletionWarningShow" class="d-flex flex-row justify-content-center mb-2 text-danger">
+  Cannot delete a Race when it is referenced by one or more Characters.
+</div>
 <div class="container card-container">
     <div *ngIf="races.length === 0">No races</div>
     <div *ngIf="races.length > 0" class="row">
@@ -12,7 +15,7 @@
                 <h6 class="card-title">{{ race.name }}</h6>
                 <div class="f-flex flex-row">
                   <i class="bi bi-pencil-square me-2" role="button" (click)="openForEdit(race)"></i>
-                  <i class="bi bi-trash3 me-1" role="button" (click)="delete(race.id)"></i>
+                  <i class="bi bi-trash3 me-1" role="button" (click)="delete(race)"></i>
                 </div>
             </div>
             <p class="card-text text-muted">{{ race.description }}</p>

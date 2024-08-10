@@ -1,5 +1,6 @@
 using CharacterCreator.Data;
 using CharacterCreator.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CharacterCreator.Repositories
 {
@@ -26,12 +27,18 @@ namespace CharacterCreator.Repositories
 
         public Race GetRace(int raceId)
         {
-            return _context.Races.Where(x => x.Id == raceId).FirstOrDefault();
+            return _context.Races
+                .Include(x => x.Characters)
+                .Where(x => x.Id == raceId)
+                .FirstOrDefault();
         }
 
         public ICollection<Race> GetRaces()
         {
-            var races = _context.Races.OrderBy(x => x.Id).ToList();
+            var races = _context.Races
+                .OrderBy(x => x.Id)
+                .Include(x => x.Characters)
+                .ToList();
             return races;
         }
 
