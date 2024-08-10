@@ -114,6 +114,12 @@ namespace CharacterCreator.Controllers
             
             var raceToDelete = _repository.GetRace(raceId);
 
+            if (raceToDelete.Characters.Count() > 0)
+            {
+                ModelState.AddModelError("", "Could not delete this Race because one or more Characters reference it!");
+                return StatusCode(500, ModelState);
+            }
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             if (!_repository.DeleteRace(raceToDelete))

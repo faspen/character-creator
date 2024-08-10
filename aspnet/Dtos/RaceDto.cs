@@ -5,6 +5,6 @@ namespace CharacterCreator.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public ICollection<CharacterDto> Characters { get; set; }
+        public List<CharacterDto> Characters { get; set; }
     }
 }
