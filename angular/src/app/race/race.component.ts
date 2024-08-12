@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RaceAddEditDto, RaceDto } from './race.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../constants.service';
@@ -9,7 +9,7 @@ import { RaceModalService } from './race-modal/racer-modal-service.service';
   templateUrl: './race.component.html',
   styleUrl: './race.component.css'
 })
-export class RaceComponent {
+export class RaceComponent implements OnInit {
   @ViewChild('characterModal') characterModal: ElementRef | undefined;
   races: RaceDto[] = [];
   raceToUpdate = new RaceAddEditDto();

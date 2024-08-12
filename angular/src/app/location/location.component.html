@@ -1,1 +1,26 @@
-<p>location works!</p>
+<div class="d-flex flex-row justify-content-center mb-3">
+    <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Location</button>
+    <!-- <app-race-modal [raceDto]="locationToUpdate" (refreshData)="getData()"></app-race-modal> -->
+</div>
+<div *ngIf="deletionWarningShow" class="d-flex flex-row justify-content-center mb-2 text-danger">
+  Cannot delete a Location when it is referenced by one or more Characters.
+</div>
+<div class="container card-container">
+    <div *ngIf="locations.length === 0">No locations</div>
+    <div *ngIf="locations.length > 0" class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let loc of locations">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="d-flex flex-row mb-2 justify-content-between">
+                <h6 class="card-title">{{ loc.name }}</h6>
+                <div class="f-flex flex-row">
+                  <i class="bi bi-pencil-square me-2" role="button" (click)="openForEdit(loc)"></i>
+                  <i class="bi bi-trash3 me-1" role="button" (click)="delete(loc)"></i>
+                </div>
+            </div>
+            <p class="card-text text-muted">{{ loc.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
