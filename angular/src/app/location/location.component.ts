@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LocationAddEditDto, LocationDto } from './location.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../constants.service';
+import { LocationModalService } from './location-modal/location-modal-service.service';
 
 @Component({
   selector: 'app-location',
@@ -14,7 +15,7 @@ export class LocationComponent implements OnInit {
   locationToUpdate = new LocationAddEditDto();
   deletionWarningShow = false;
 
-  constructor(private http: HttpClient, private constants: ConstantsService) {}
+  constructor(private http: HttpClient, private constants: ConstantsService, private modalService: LocationModalService) {}
 
   ngOnInit(): void {
       this.getData();
@@ -31,7 +32,7 @@ export class LocationComponent implements OnInit {
   }
 
   openModal() {
-    //
+    this.modalService.showModal();
     this.locationToUpdate = new LocationAddEditDto();
   }
 
