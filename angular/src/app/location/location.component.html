@@ -1,6 +1,6 @@
 <div class="d-flex flex-row justify-content-center mb-3">
     <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Location</button>
-    <!-- <app-race-modal [raceDto]="locationToUpdate" (refreshData)="getData()"></app-race-modal> -->
+    <app-location-modal [locationDto]="locationToUpdate" (refreshData)="getData()"></app-location-modal>
 </div>
 <div *ngIf="deletionWarningShow" class="d-flex flex-row justify-content-center mb-2 text-danger">
   Cannot delete a Location when it is referenced by one or more Characters.

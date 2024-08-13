@@ -19,10 +19,10 @@ import { LocationModalComponent } from './location/location-modal/location-modal
     CharacterComponent,
     FactionComponent,
     LocationComponent,
+    LocationModalComponent,
     CharacterModalComponent,
     RaceComponent,
-    RaceModalComponent,
-    LocationModalComponent
+    RaceModalComponent
   ],
   imports: [
     BrowserModule,
