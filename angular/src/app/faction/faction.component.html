@@ -1,1 +1,26 @@
-<p>faction works!</p>
+<div class="d-flex flex-row justify-content-center mb-3">
+    <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Faction</button>
+    <!-- <app-faction-modal [factionDto]="factionToUpdate" (refreshData)="getData()"></app-faction-modal> -->
+</div>
+<div *ngIf="deletionWarningShow" class="d-flex flex-row justify-content-center mb-2 text-danger">
+  Cannot delete a faction when it is referenced by one or more Characters.
+</div>
+<div class="container card-container">
+    <div *ngIf="factions.length === 0">No factions</div>
+    <div *ngIf="factions.length > 0" class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let fac of factions">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="d-flex flex-row mb-2 justify-content-between">
+                <h6 class="card-title">{{ fac.name }}</h6>
+                <div class="f-flex flex-row">
+                  <i class="bi bi-pencil-square me-2" role="button" (click)="openForEdit(fac)"></i>
+                  <i class="bi bi-trash3 me-1" role="button" (click)="delete(fac)"></i>
+                </div>
+            </div>
+            <p class="card-text text-muted">{{ fac.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
