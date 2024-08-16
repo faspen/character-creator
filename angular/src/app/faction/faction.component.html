@@ -1,6 +1,6 @@
 <div class="d-flex flex-row justify-content-center mb-3">
     <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Faction</button>
-    <!-- <app-faction-modal [factionDto]="factionToUpdate" (refreshData)="getData()"></app-faction-modal> -->
+    <app-faction-modal [factionDto]="factionToUpdate" (refreshData)="getData()"></app-faction-modal>
 </div>
 <div *ngIf="deletionWarningShow" class="d-flex flex-row justify-content-center mb-2 text-danger">
   Cannot delete a faction when it is referenced by one or more Characters.
