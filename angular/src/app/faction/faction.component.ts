@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ConstantsService } from '../constants.service';
 import { FactionAddEditDto, FactionDto } from './faction.model';
+import { FactionModalService } from './faction-modal/faction-modal-service.service';
 
 @Component({
   selector: 'app-faction',
@@ -14,7 +15,7 @@ export class FactionComponent {
   factionToUpdate = new FactionAddEditDto();
   deletionWarningShow = false;
 
-  constructor(private http: HttpClient, private constants: ConstantsService) {}
+  constructor(private http: HttpClient, private constants: ConstantsService, private modalService: FactionModalService) {}
 
   ngOnInit(): void {
       this.getData();
@@ -31,7 +32,7 @@ export class FactionComponent {
   }
 
   openModal() {
-    // this.modalService.showModal();
+    this.modalService.showModal();
     this.factionToUpdate = new FactionAddEditDto();
   }
 

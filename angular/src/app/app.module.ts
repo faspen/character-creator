@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RaceComponent } from './race/race.component';
 import { RaceModalComponent } from './race/race-modal/race-modal.component';
 import { LocationModalComponent } from './location/location-modal/location-modal.component';
+import { FactionModalComponent } from './faction/faction-modal/faction-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LocationModalComponent } from './location/location-modal/location-modal
     LocationModalComponent,
     CharacterModalComponent,
     RaceComponent,
-    RaceModalComponent
+    RaceModalComponent,
+    FactionModalComponent
   ],
   imports: [
     BrowserModule,
