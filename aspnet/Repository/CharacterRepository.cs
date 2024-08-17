@@ -1,5 +1,6 @@
 using CharacterCreator.Data;
 using CharacterCreator.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CharacterCreator.Repositories
 {
@@ -36,7 +37,7 @@ namespace CharacterCreator.Repositories
 
         public ICollection<Character> GetCharacters()
         {
-            return _context.Characters.OrderBy(x => x.Id).ToList();
+            return _context.Characters.Include(x => x.Race).OrderBy(x => x.Id).ToList();
         }
 
         public bool Save()

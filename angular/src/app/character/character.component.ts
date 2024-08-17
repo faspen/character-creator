@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../constants.service';
-import { CharacterAddEditDto, CharacterDto } from './character.model';
+import { CharacterAddEditDto, CharacterDto, Sex } from './character.model';
 import { CharacterModalService } from './character-modal/character-modal-service.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { CharacterModalService } from './character-modal/character-modal-service
 export class CharacterComponent implements OnInit {
   @ViewChild('characterModal') characterModal: ElementRef | undefined;
   characters: CharacterDto[] = [];
+  sexes = Sex;
   characterToUpdate = new CharacterAddEditDto();
 
   constructor(private http: HttpClient, private constants: ConstantsService, private modalService: CharacterModalService) { }
@@ -25,6 +26,7 @@ export class CharacterComponent implements OnInit {
       .subscribe({
         next: res => {
           this.characters = res as CharacterDto[];
+          console.log(this.characters);
         },
         error: err => console.log(err)
       });
