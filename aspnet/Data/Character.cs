@@ -21,5 +21,11 @@ namespace CharacterCreator.Data
 
         public int? RaceId { get; set; }
         public Race Race { get; set; }
+
+        public int? FactionId { get; set; }
+        public Faction Faction { get; set; }
+
+        public int? LocationId { get; set; }
+        public Location Location { get; set; }
     }
 }

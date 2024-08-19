@@ -21,6 +21,18 @@ namespace CharacterCreator.Data
                 .WithMany(r => r.Characters)
                 .HasForeignKey(c => c.RaceId)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Character>()
+                .HasOne(c => c.Faction)
+                .WithMany(r => r.Characters)
+                .HasForeignKey(c => c.FactionId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Character>()
+                .HasOne(c => c.Location)
+                .WithMany(r => r.Characters)
+                .HasForeignKey(c => c.LocationId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

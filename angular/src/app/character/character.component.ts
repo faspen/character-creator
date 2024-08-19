@@ -26,7 +26,6 @@ export class CharacterComponent implements OnInit {
       .subscribe({
         next: res => {
           this.characters = res as CharacterDto[];
-          console.log(this.characters);
         },
         error: err => console.log(err)
       });
