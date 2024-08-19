@@ -37,7 +37,12 @@ namespace CharacterCreator.Repositories
 
         public ICollection<Character> GetCharacters()
         {
-            return _context.Characters.Include(x => x.Race).OrderBy(x => x.Id).ToList();
+            return _context.Characters
+                .Include(x => x.Race)
+                .Include(x => x.Faction)
+                .Include(x => x.Location)
+                .OrderBy(x => x.Id)
+                .ToList();
         }
 
         public bool Save()
