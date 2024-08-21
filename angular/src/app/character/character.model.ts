@@ -1,3 +1,5 @@
+import { FactionDto } from "../faction/faction.model";
+import { LocationDto } from "../location/location.model";
 import { RaceDto } from "../race/race.model";
 
 export class CharacterDto {
@@ -11,6 +13,10 @@ export class CharacterDto {
     eyeColor: string = '';
     raceId: number = 0;
     race: RaceDto = new RaceDto();
+    factionId: number = 0;
+    faction: FactionDto = new FactionDto();
+    locationId: number = 0;
+    location: LocationDto = new LocationDto();
 }
 
 export class CharacterAddEditDto {
@@ -23,6 +29,8 @@ export class CharacterAddEditDto {
     hairColor: string = '';
     eyeColor: string = '';
     raceId: number = 0;
+    factionId: number = 0;
+    locationId: number = 0;
 }
 
 export enum Sex {

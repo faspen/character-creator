@@ -15,5 +15,11 @@ namespace CharacterCreator.Dtos
 
         public int? RaceId { get; set; }
         public RaceDto Race { get; set; }
+
+        public int? LocationId { get; set; }
+        public LocationDto Location { get; set; }
+
+        public int? FactionId { get; set; }
+        public FactionDto Faction { get; set; }
     }
 }

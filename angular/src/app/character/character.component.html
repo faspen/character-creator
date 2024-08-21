@@ -17,8 +17,11 @@
             </div>
             <p class="card-text">Age: <b>{{ char.age }}</b> | Sex: <b>{{ sexes[char.sex] }}</b> | Height: <b>{{ char.height }}cm</b></p>
             <p class="card-text">Hair Color: <b>{{ char.hairColor }}</b> | Eye Color: <b>{{ char.eyeColor }}</b></p>
-            <p class="card-text" *ngIf="char.raceId < 1">Race: Not specified</p>
-            <p class="card-text" *ngIf="char.raceId > 0">Race: <b>{{ char.race.name }}</b><p>
+            <p class="card-text">
+              Race: <b>{{ char.race ? char.race.name : 'Not Specified' }}</b> | 
+              Faction: <b>{{ char.faction ? char.faction.name : 'Not Specified' }}</b> | 
+              Location: <b>{{ char.location ? char.location.name : 'Not Specified' }}</b>
+            <p>
           </div>
         </div>
       </div>
