@@ -19,5 +19,7 @@ namespace CharacterCreator.Dtos
         public string? EyeColor { get; set; }
 
         public int? RaceId { get; set; }
+        public int? LocationId { get; set; }
+        public int? FactionId { get; set; }
     }
 }

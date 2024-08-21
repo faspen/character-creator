@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../constants.service';
 import { NgForm } from '@angular/forms';
 import { RaceDto } from '../../race/race.model';
+import { LocationDto } from '../../location/location.model';
+import { FactionDto } from '../../faction/faction.model';
 
 class Option {
   name: string = '';
@@ -23,8 +25,12 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   @Input() characterDto = new CharacterAddEditDto();
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
   races: RaceDto[] = [];
+  locations: LocationDto[] = [];
+  factions: FactionDto[] = [];
   modalVisible = false;
-  default: RaceDto = { id: 0, name: 'Select race', description: '', characters: [] };
+  defaultRace: RaceDto = { id: 0, name: 'Select race', description: '', characters: [] };
+  defaultLocation: LocationDto = { id: 0, name: 'Select location', description: '', characters: [] };
+  defaultFaction: FactionDto = { id: 0, name: 'Select faction', description: '', characters: [] };
   subscription!: Subscription;
   backdrop: HTMLElement | null = null;
   options: Option[] = [
@@ -50,6 +56,8 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       }
     });
     this.getRaces();
+    this.getLocations();
+    this.getFactions();
   }
 
   ngOnDestroy() {
@@ -61,7 +69,29 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       .subscribe({
         next: res => {
           this.races = res as RaceDto[];
-          this.races = [this.default].concat(this.races);
+          this.races = [this.defaultRace].concat(this.races);
+        },
+        error: err => console.log(err)
+      });
+  }
+
+  getLocations() {
+    this.http.get(this.constants.apiUrl + 'Location')
+      .subscribe({
+        next: res => {
+          this.locations = res as LocationDto[];
+          this.locations = [this.defaultLocation].concat(this.locations);
+        },
+        error: err => console.log(err)
+      });
+  }
+
+  getFactions() {
+    this.http.get(this.constants.apiUrl + 'Faction')
+      .subscribe({
+        next: res => {
+          this.factions = res as RaceDto[];
+          this.factions = [this.defaultFaction].concat(this.factions);
         },
         error: err => console.log(err)
       });

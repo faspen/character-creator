@@ -116,6 +116,30 @@
                                     <option *ngFor="let race of races" [value]="race.id" [disabled]="race.id === 0">{{ race.name }}</option>
                                 </select>
                             </div>
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="location" class="mb-1">Location</label>
+                                <select
+                                    name="location"
+                                    id="location"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.locationId"
+                                    aria-placeholder="Select location"
+                                >
+                                    <option *ngFor="let location of locations" [value]="location.id" [disabled]="location.id === 0">{{ location.name }}</option>
+                                </select>
+                            </div>
+                            <div class="d-flex flex-column w-25 me-2">
+                                <label for="faction" class="mb-1">Faction</label>
+                                <select
+                                    name="faction"
+                                    id="faction"
+                                    class="form-control border-primary"
+                                    [(ngModel)]="characterDto.factionId"
+                                    aria-placeholder="Select faction"
+                                >
+                                    <option *ngFor="let faction of factions" [value]="faction.id" [disabled]="faction.id === 0">{{ faction.name }}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
