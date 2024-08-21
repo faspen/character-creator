@@ -1,1 +1,1 @@
-Create characters with this .NET application.
+Create characters with this .NET application. More details coming.
