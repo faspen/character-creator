@@ -13,6 +13,7 @@ namespace CharacterCreator.Data
         public DbSet<Faction> Factions { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Race> Races { get; set; }
+        public DbSet<Relationship> Relationships { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +34,21 @@ namespace CharacterCreator.Data
                 .WithMany(r => r.Characters)
                 .HasForeignKey(c => c.LocationId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Relationship>()
+                .HasOne(c => c.Character)
+                .WithMany(r => r.Relationships)
+                .HasForeignKey(c => c.FirstCharacterId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Relationship>()
+                .HasOne(c => c.Character)
+                .WithMany(r => r.Relationships)
+                .HasForeignKey(c => c.SecondCharacterId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Relationship>()
+                .HasCheckConstraint("CK_Unique_FKs", "[FirstCharacterId] <> [SecondCharacterId]");
         }
     }
 }
