@@ -36,14 +36,14 @@ namespace CharacterCreator.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Relationship>()
-                .HasOne(c => c.Character)
-                .WithMany(r => r.Relationships)
+                .HasOne(c => c.FirstCharacter)
+                .WithMany(r => r.RelationshipsAsFirst)
                 .HasForeignKey(c => c.FirstCharacterId)
                 .OnDelete(DeleteBehavior.Restrict);
             
             modelBuilder.Entity<Relationship>()
-                .HasOne(c => c.Character)
-                .WithMany(r => r.Relationships)
+                .HasOne(c => c.SecondCharacter)
+                .WithMany(r => r.RelationshipsAsSecond)
                 .HasForeignKey(c => c.SecondCharacterId)
                 .OnDelete(DeleteBehavior.Restrict);
             

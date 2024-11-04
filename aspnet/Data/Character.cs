@@ -28,6 +28,7 @@ namespace CharacterCreator.Data
         public int? LocationId { get; set; }
         public Location Location { get; set; }
 
-        public ICollection<Relationship> Relationships { get; set; }
+        public ICollection<Relationship> RelationshipsAsFirst { get; set; }
+        public ICollection<Relationship> RelationshipsAsSecond { get; set; }
     }
 }

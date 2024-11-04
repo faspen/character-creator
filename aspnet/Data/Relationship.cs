@@ -12,7 +12,7 @@ namespace CharacterCreator.Data
         public Character FirstCharacter { get; set; }
 
         public int SecondCharacterId { get; set; }
-        public Character Character { get; set; }
+        public Character SecondCharacter { get; set; }
 
         public RelationshipType RelationshipType { get; set; }
     }
