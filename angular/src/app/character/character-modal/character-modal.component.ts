@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CharacterModalService } from './character-modal-service.service';
 import { Subscription } from 'rxjs';
-import { CharacterAddEditDto, Sex } from '../character.model';
+import { CharacterAddEditDto, RelationshipType, Sex } from '../character.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../constants.service';
 import { NgForm } from '@angular/forms';
@@ -9,10 +9,15 @@ import { RaceDto } from '../../race/race.model';
 import { LocationDto } from '../../location/location.model';
 import { FactionDto } from '../../faction/faction.model';
 
-class Option {
+class SexOption {
   name: string = '';
   value: Sex = 0;
   disabled: boolean = false;
+}
+
+class RelationshipOption {
+  name: string = '';
+  value: RelationshipType = 1;
 }
 
 @Component({
@@ -33,11 +38,21 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   defaultFaction: FactionDto = { id: 0, name: 'Select faction', description: '', characters: [] };
   subscription!: Subscription;
   backdrop: HTMLElement | null = null;
-  options: Option[] = [
+  sexOptions: SexOption[] = [
     { name: 'Select sex', value: 0, disabled: true },
     { name: 'Male', value: 1, disabled: false },
     { name: 'Female', value: 2, disabled: false }
-  ]
+  ];
+  relationshipOptions: RelationshipOption[] = [
+    { name: 'Acquaintance', value: RelationshipType.Acquaintance },
+    { name: 'Ally', value: RelationshipType.Ally },
+    { name: 'Friend', value: RelationshipType.Friend },
+    { name: 'Lover', value: RelationshipType.Lover },
+    { name: 'Spouse', value: RelationshipType.Spouse },
+    { name: 'Rival', value: RelationshipType.Rival },
+    { name: 'Enemy', value: RelationshipType.Enemy },
+    { name: 'Sibling', value: RelationshipType.Sibling }
+  ];
 
   constructor(
     private modalService: CharacterModalService,

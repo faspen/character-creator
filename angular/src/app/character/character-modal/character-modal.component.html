@@ -64,7 +64,7 @@
                                     [(ngModel)]="characterDto.sex"
                                     aria-placeholder="Choose sex"
                                 >
-                                    <option *ngFor="let option of options" [value]="option.value" [disabled]="option.disabled">{{ option.name }}</option>
+                                    <option *ngFor="let option of sexOptions" [value]="option.value" [disabled]="option.disabled">{{ option.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                 >
                             </div>
                         </div>
-                        <div class="d-flex flex-row mb-2">
+                        <div class="d-flex flex-row mb-5">
                             <div class="d-flex flex-column w-25 me-2">
                                 <label for="race" class="mb-1">Race</label>
                                 <select
@@ -140,6 +140,34 @@
                                     <option *ngFor="let faction of factions" [value]="faction.id" [disabled]="faction.id === 0">{{ faction.name }}</option>
                                 </select>
                             </div>
+                        </div>
+                        <h4>Relationships</h4>
+                        <div class="d-flex flex-column mb-2">
+                            <div class="d-flex flex-row mb-2">
+                                <div class="d-flex flex-column w-25 me-2">
+                                    <select 
+                                        name="type"
+                                        id="type"
+                                        class="form-control border-primary"
+                                        aria-placeholder="Choose type"
+                                    >
+                                        <option *ngFor="let option of relationshipOptions" [value]="option.value">{{ option.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex flex-column me-1 mt-2">with</div>
+                                <div class="d-flex flex-column w-25 me-3">
+                                    <select 
+                                        name="type"
+                                        id="type"
+                                        class="form-control border-primary"
+                                        aria-placeholder="Choose type"
+                                    >
+                                        <option *ngFor="let option of relationshipOptions" [value]="option.value">{{ option.name }}</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash3 mt-2" role="button"></i></button>
+                            </div>
+                            <button class="btn btn-sm btn-primary w-25">Add Relationship</button>
                         </div>
                     </div>
                 </div>
