@@ -18,6 +18,9 @@ namespace CharacterCreator.Dtos
 
             CreateMap<Location, LocationDto>();
             CreateMap<LocationAddEditDto, Location>();
+
+            CreateMap<Relationship, RelationshipDto>();
+            CreateMap<RelationshipAddEditDto, Relationship>();
         }
     }
 }

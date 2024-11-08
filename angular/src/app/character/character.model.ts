@@ -17,6 +17,8 @@ export class CharacterDto {
     faction: FactionDto = new FactionDto();
     locationId: number = 0;
     location: LocationDto = new LocationDto();
+    relationshipsAsFirst: RelationshipDto[] = [];
+    relationshipsAsSecond: RelationshipDto[] = [];
 }
 
 export class CharacterAddEditDto {
@@ -31,10 +33,39 @@ export class CharacterAddEditDto {
     raceId: number = 0;
     factionId: number = 0;
     locationId: number = 0;
+    relationshipsAsFirst: RelationshipAddEditDto[] = [];
+    relationshipsAsSecond: RelationshipAddEditDto[] = [];
+}
+
+export class RelationshipDto {
+    id: number = 0;
+    firstCharacterId: number = 0;
+    firstCharacter: CharacterDto = new CharacterDto();
+    secondCharacterId: number = 0;
+    secondCharacter: CharacterDto = new CharacterDto();
+    relationshipType: RelationshipType = 1;
+}
+
+export class RelationshipAddEditDto {
+    id: number = 0;
+    firstCharacterId: number = 0;
+    secondCharacterId: number = 0;
+    relationshipType: RelationshipType = 1;
 }
 
 export enum Sex {
     NotSelected = 0,
     Male,
     Female
+}
+
+export enum RelationshipType {
+    Acquaintance = 1,
+    Ally,
+    Friend,
+    Lover,
+    Spouse,
+    Rival,
+    Enemy,
+    Sibling
 }

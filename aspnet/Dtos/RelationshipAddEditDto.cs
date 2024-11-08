@@ -1,3 +1,5 @@
+using CharacterCreator.Data;
+
 namespace CharacterCreator.Dtos
 {
     public class RelationshipAddEditDto

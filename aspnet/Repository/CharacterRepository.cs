@@ -41,6 +41,8 @@ namespace CharacterCreator.Repositories
                 .Include(x => x.Race)
                 .Include(x => x.Faction)
                 .Include(x => x.Location)
+                .Include(x => x.RelationshipsAsFirst)
+                .Include(x => x.RelationshipsAsSecond)
                 .OrderBy(x => x.Id)
                 .ToList();
         }

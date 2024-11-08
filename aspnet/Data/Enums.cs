@@ -6,4 +6,16 @@ namespace CharacterCreator.Data
         Male,
         Female
     }
+
+    public enum RelationshipType
+    {
+        Acquaintance = 1,
+        Ally,
+        Friend,
+        Lover,
+        Spouse,
+        Rival,
+        Enemy,
+        Sibling
+    }
 }
