@@ -25,6 +25,7 @@ export class CharacterComponent implements OnInit {
     this.http.get(this.constants.apiUrl + 'Character')
       .subscribe({
         next: res => {
+          console.log(res);
           this.characters = res as CharacterDto[];
         },
         error: err => console.log(err)

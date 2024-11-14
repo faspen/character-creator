@@ -7,7 +7,9 @@ namespace CharacterCreator.Dtos
     {
         public CharacterCreatorAutoMapper()
         {
-            CreateMap<Character, CharacterDto>();
+            CreateMap<Character, CharacterDto>()
+                .ForMember(dest => dest.RelationshipsAsFirst, opt => opt.MapFrom(src => src.RelationshipsAsFirst))
+                .ForMember(dest => dest.RelationshipsAsSecond, opt => opt.MapFrom(src => src.RelationshipsAsSecond));
             CreateMap<CharacterAddEditDto, Character>();
 
             CreateMap<Race, RaceDto>();

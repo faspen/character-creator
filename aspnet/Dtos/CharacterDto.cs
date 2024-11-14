@@ -21,5 +21,8 @@ namespace CharacterCreator.Dtos
 
         public int? FactionId { get; set; }
         public FactionDto Faction { get; set; }
+
+        public ICollection<RelationshipDto> RelationshipsAsFirst { get; set; }
+        public ICollection<RelationshipDto> RelationshipsAsSecond { get; set; }
     }
 }

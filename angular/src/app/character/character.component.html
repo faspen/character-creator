@@ -1,6 +1,6 @@
 <div class="d-flex flex-row justify-content-center mb-3">
     <button class="btn btn-primary btn-sm" (click)="openModal()"><i class="bi bi-plus-circle me-2"></i>Create Character</button>
-    <app-character-modal [characterDto]="characterToUpdate" (refreshData)="getData()"></app-character-modal>
+    <app-character-modal [characterDto]="characterToUpdate" [characterData]="characters" (refreshData)="getData()"></app-character-modal>
 </div>
 <div class="container card-container">
     <div *ngIf="characters.length === 0">No characters</div>

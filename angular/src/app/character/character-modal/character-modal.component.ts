@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CharacterModalService } from './character-modal-service.service';
 import { Subscription } from 'rxjs';
-import { CharacterAddEditDto, RelationshipType, Sex } from '../character.model';
+import { CharacterAddEditDto, CharacterDto, RelationshipAddEditDto, RelationshipType, Sex } from '../character.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../constants.service';
 import { NgForm } from '@angular/forms';
@@ -28,6 +28,7 @@ class RelationshipOption {
 export class CharacterModalComponent implements OnInit, OnDestroy {
   @ViewChild('characterForm') characterForm: NgForm | undefined;
   @Input() characterDto = new CharacterAddEditDto();
+  @Input() characterData: CharacterDto[] = [];
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
   races: RaceDto[] = [];
   locations: LocationDto[] = [];
@@ -110,6 +111,15 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
         },
         error: err => console.log(err)
       });
+  }
+
+  addRelationship() {
+    this.characterDto.relationshipsAsFirst.push({
+      id: 0,
+      firstCharacterId: this.characterDto.id,
+      secondCharacterId: 0,
+      relationshipType: 1
+    });
   }
 
   closeModal() {
