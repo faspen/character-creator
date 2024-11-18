@@ -25,7 +25,6 @@ export class CharacterComponent implements OnInit {
     this.http.get(this.constants.apiUrl + 'Character')
       .subscribe({
         next: res => {
-          console.log(res);
           this.characters = res as CharacterDto[];
         },
         error: err => console.log(err)
@@ -37,9 +36,15 @@ export class CharacterComponent implements OnInit {
     this.characterToUpdate = new CharacterAddEditDto();
   }
 
-  openForEdit(character: CharacterDto) {
+  openForEdit(characterId: number) {
     this.openModal();
-    this.characterToUpdate = { ...character };
+    this.http.get(this.constants.apiUrl + 'Character/' + characterId)
+      .subscribe({
+        next: res => {
+          this.characterToUpdate = res as CharacterDto;
+        },
+        error: err => console.log(err)
+      });
   }
 
   delete(id: number) {

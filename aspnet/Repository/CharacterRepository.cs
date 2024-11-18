@@ -32,7 +32,14 @@ namespace CharacterCreator.Repositories
 
         public Character GetCharacter(int characterId)
         {
-            return _context.Characters.Where(x => x.Id == characterId).FirstOrDefault();
+            return _context.Characters
+                .Include(x => x.Race)
+                .Include(x => x.Faction)
+                .Include(x => x.Location)
+                .Include(x => x.RelationshipsAsFirst)
+                .Include(x => x.RelationshipsAsSecond)
+                .Where(x => x.Id == characterId)
+                .FirstOrDefault();
         }
 
         public ICollection<Character> GetCharacters()

@@ -119,7 +119,7 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       firstCharacterId: this.characterDto.id,
       secondCharacterId: 0,
       relationshipType: 1
-    });
+    } as RelationshipAddEditDto);
   }
 
   closeModal() {
