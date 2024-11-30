@@ -128,6 +128,8 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.correctTypes();
+    console.log(this.characterDto.relationshipsAsFirst);
     this.characterDto.sex = Number(this.characterDto.sex);
     if (this.characterDto.id < 1) {
       this.http.post(this.constants.apiUrl + 'Character', this.characterDto, { responseType: 'text' })
@@ -151,6 +153,13 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
             console.log(err);
           }
         });
+    }
+  }
+
+  correctTypes() {
+    for (let rel of this.characterDto.relationshipsAsFirst) {
+      const typeNumber = Number(rel.relationshipType);
+      rel.relationshipType = typeNumber as RelationshipType;
     }
   }
 

@@ -21,5 +21,8 @@ namespace CharacterCreator.Dtos
         public int? RaceId { get; set; }
         public int? LocationId { get; set; }
         public int? FactionId { get; set; }
+
+        public List<RelationshipAddEditDto> RelationshipsAsFirst { get; set; }
+        public List<RelationshipAddEditDto> RelationshipsAsSecond { get; set; }
     }
 }
