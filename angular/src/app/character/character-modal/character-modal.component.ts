@@ -122,6 +122,21 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
     } as RelationshipAddEditDto);
   }
 
+  removeRelationshipAsFirst(id: number, index: number) {
+    if (id > 0) {
+      this.http.delete(this.constants.apiUrl + 'Relationship/' + id)
+        .subscribe({
+          next: res => {
+            //
+          },
+          error: err => {
+            console.log(err);
+          }
+        })
+    }
+    this.characterDto.relationshipsAsFirst.splice(index, 1);
+  }
+
   closeModal() {
     this.characterForm?.resetForm();
     this.modalService.hideModal();

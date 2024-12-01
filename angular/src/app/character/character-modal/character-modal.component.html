@@ -167,7 +167,7 @@
                                         <option *ngFor="let character of characterData" [disabled]="character.id === characterDto.id" [value]="character.id">{{ character.firstName + ' ' + character.lastName }}</option>
                                     </select>
                                 </div>
-                                <button class="btn btn-sm btn-danger"><i class="bi bi-trash3 mt-2" role="button"></i></button>
+                                <button type="button" class="btn btn-sm btn-danger" (click)="removeRelationshipAsFirst(relationship.id, i)"><i class="bi bi-trash3 mt-2" role="button"></i></button>
                             </div>
                             <button type="button" class="btn btn-sm btn-primary w-25" (click)="addRelationship()">Add Relationship</button>
                         </div>

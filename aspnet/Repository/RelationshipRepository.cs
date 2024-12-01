@@ -19,7 +19,7 @@ namespace CharacterCreator.Repositories
             return Save();
         }
 
-        public bool DeleteCharacter(Relationship relationship)
+        public bool DeleteRelationship(Relationship relationship)
         {
             _context.Remove(relationship);
             return Save();

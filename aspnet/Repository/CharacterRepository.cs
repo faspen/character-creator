@@ -26,6 +26,14 @@ namespace CharacterCreator.Repositories
 
         public bool DeleteCharacter(Character character)
         {
+            foreach (var rel in character.RelationshipsAsFirst)
+            {
+                _context.Remove(rel);
+            }
+            foreach (var rel in character.RelationshipsAsSecond)
+            {
+                _context.Remove(rel);
+            }
             _context.Remove(character);
             return Save();
         }
