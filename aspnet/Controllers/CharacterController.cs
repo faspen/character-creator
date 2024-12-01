@@ -69,6 +69,8 @@ namespace CharacterCreator.Controllers
                 return BadRequest(ModelState);
             
             var characterMap = _mapper.Map<Character>(characterCreate);
+            characterMap.RelationshipsAsFirst = _mapper.Map<ICollection<Relationship>>(characterCreate.RelationshipsAsFirst);
+            characterMap.RelationshipsAsSecond = _mapper.Map<ICollection<Relationship>>(characterCreate.RelationshipsAsSecond);
             
             if (!_repository.CreateCharacter(characterMap))
             {
@@ -95,6 +97,8 @@ namespace CharacterCreator.Controllers
                 return BadRequest(ModelState);
             
             var characterMap = _mapper.Map<Character>(characterUpdate);
+            characterMap.RelationshipsAsFirst = _mapper.Map<ICollection<Relationship>>(characterUpdate.RelationshipsAsFirst);
+            characterMap.RelationshipsAsSecond = _mapper.Map<ICollection<Relationship>>(characterUpdate.RelationshipsAsSecond);
 
             if (!_repository.UpdateCharacter(characterMap))
             {

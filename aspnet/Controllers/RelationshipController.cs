@@ -31,8 +31,8 @@ namespace CharacterCreator.Controllers
             return Ok(relatinshipMap);
         }
 
-        [HttpGet("{characterId}")]
-        [ProducesResponseType(200, Type = typeof(CharacterDto))]
+        [HttpGet("{relationshipId}")]
+        [ProducesResponseType(200, Type = typeof(RelationshipDto))]
         public IActionResult GetRelationship(int relationshipId)
         {
             var exists = _repository.RelationshipExists(relationshipId);
@@ -105,7 +105,7 @@ namespace CharacterCreator.Controllers
             return Ok("Successfully Updated!");
         }
 
-        [HttpDelete("{characterId}")]
+        [HttpDelete("{relationshipId}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -119,7 +119,7 @@ namespace CharacterCreator.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            if (!_repository.DeleteCharacter(relationshipToDelete))
+            if (!_repository.DeleteRelationship(relationshipToDelete))
             {
                 ModelState.AddModelError("", "Something went wrong while deleting");
                 return StatusCode(500, ModelState);

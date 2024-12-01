@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { CharacterModalService } from './character-modal-service.service';
 import { Subscription } from 'rxjs';
-import { CharacterAddEditDto, Sex } from '../character.model';
+import { CharacterAddEditDto, CharacterDto, RelationshipAddEditDto, RelationshipType, Sex } from '../character.model';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../../constants.service';
 import { NgForm } from '@angular/forms';
@@ -9,10 +9,15 @@ import { RaceDto } from '../../race/race.model';
 import { LocationDto } from '../../location/location.model';
 import { FactionDto } from '../../faction/faction.model';
 
-class Option {
+class SexOption {
   name: string = '';
   value: Sex = 0;
   disabled: boolean = false;
+}
+
+class RelationshipOption {
+  name: string = '';
+  value: RelationshipType = 1;
 }
 
 @Component({
@@ -23,6 +28,7 @@ class Option {
 export class CharacterModalComponent implements OnInit, OnDestroy {
   @ViewChild('characterForm') characterForm: NgForm | undefined;
   @Input() characterDto = new CharacterAddEditDto();
+  @Input() characterData: CharacterDto[] = [];
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
   races: RaceDto[] = [];
   locations: LocationDto[] = [];
@@ -33,11 +39,21 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
   defaultFaction: FactionDto = { id: 0, name: 'Select faction', description: '', characters: [] };
   subscription!: Subscription;
   backdrop: HTMLElement | null = null;
-  options: Option[] = [
+  sexOptions: SexOption[] = [
     { name: 'Select sex', value: 0, disabled: true },
     { name: 'Male', value: 1, disabled: false },
     { name: 'Female', value: 2, disabled: false }
-  ]
+  ];
+  relationshipOptions: RelationshipOption[] = [
+    { name: 'Acquaintance', value: RelationshipType.Acquaintance },
+    { name: 'Ally', value: RelationshipType.Ally },
+    { name: 'Friend', value: RelationshipType.Friend },
+    { name: 'Lover', value: RelationshipType.Lover },
+    { name: 'Spouse', value: RelationshipType.Spouse },
+    { name: 'Rival', value: RelationshipType.Rival },
+    { name: 'Enemy', value: RelationshipType.Enemy },
+    { name: 'Sibling', value: RelationshipType.Sibling }
+  ];
 
   constructor(
     private modalService: CharacterModalService,
@@ -97,12 +113,38 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
       });
   }
 
+  addRelationship() {
+    this.characterDto.relationshipsAsFirst.push({
+      id: 0,
+      firstCharacterId: this.characterDto.id,
+      secondCharacterId: 0,
+      relationshipType: 1
+    } as RelationshipAddEditDto);
+  }
+
+  removeRelationshipAsFirst(id: number, index: number) {
+    if (id > 0) {
+      this.http.delete(this.constants.apiUrl + 'Relationship/' + id)
+        .subscribe({
+          next: res => {
+            //
+          },
+          error: err => {
+            console.log(err);
+          }
+        })
+    }
+    this.characterDto.relationshipsAsFirst.splice(index, 1);
+  }
+
   closeModal() {
     this.characterForm?.resetForm();
     this.modalService.hideModal();
   }
 
   save() {
+    this.correctTypes();
+    console.log(this.characterDto.relationshipsAsFirst);
     this.characterDto.sex = Number(this.characterDto.sex);
     if (this.characterDto.id < 1) {
       this.http.post(this.constants.apiUrl + 'Character', this.characterDto, { responseType: 'text' })
@@ -126,6 +168,13 @@ export class CharacterModalComponent implements OnInit, OnDestroy {
             console.log(err);
           }
         });
+    }
+  }
+
+  correctTypes() {
+    for (let rel of this.characterDto.relationshipsAsFirst) {
+      const typeNumber = Number(rel.relationshipType);
+      rel.relationshipType = typeNumber as RelationshipType;
     }
   }
 

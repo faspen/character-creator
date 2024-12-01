@@ -26,13 +26,28 @@ namespace CharacterCreator.Repositories
 
         public bool DeleteCharacter(Character character)
         {
+            foreach (var rel in character.RelationshipsAsFirst)
+            {
+                _context.Remove(rel);
+            }
+            foreach (var rel in character.RelationshipsAsSecond)
+            {
+                _context.Remove(rel);
+            }
             _context.Remove(character);
             return Save();
         }
 
         public Character GetCharacter(int characterId)
         {
-            return _context.Characters.Where(x => x.Id == characterId).FirstOrDefault();
+            return _context.Characters
+                .Include(x => x.Race)
+                .Include(x => x.Faction)
+                .Include(x => x.Location)
+                .Include(x => x.RelationshipsAsFirst)
+                .Include(x => x.RelationshipsAsSecond)
+                .Where(x => x.Id == characterId)
+                .FirstOrDefault();
         }
 
         public ICollection<Character> GetCharacters()
@@ -41,6 +56,8 @@ namespace CharacterCreator.Repositories
                 .Include(x => x.Race)
                 .Include(x => x.Faction)
                 .Include(x => x.Location)
+                .Include(x => x.RelationshipsAsFirst)
+                .Include(x => x.RelationshipsAsSecond)
                 .OrderBy(x => x.Id)
                 .ToList();
         }

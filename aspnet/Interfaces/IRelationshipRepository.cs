@@ -9,7 +9,7 @@ namespace CharacterCreator.Interfaces
         bool RelationshipExists(int relationshipId);
         bool CreateRelationship(Relationship relationship);
         bool UpdateRelationship(Relationship relationship);
-        bool DeleteCharacter(Relationship relationship);
+        bool DeleteRelationship(Relationship relationship);
         bool Save();
     }
 }
